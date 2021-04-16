@@ -1,0 +1,20 @@
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+
+myfile = ABopenfile("testfile.txt",True)  #Create an AB file
+
+try:
+  myfile.writeat("ShamE", 100)
+  myfile.close()
+except:
+  log("Valid Data write to a file is unsuccessful!")
+
+
+
+
+
+
+
+

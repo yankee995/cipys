@@ -1,0 +1,36 @@
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+
+myfile = ABopenfile("testfile.txt",True)  #Create an AB file
+
+myfile.writeat("SizE",0)
+myfile.writeat("Size sizE", 0)
+
+myfile.close()
+
+myfile = ABopenfile("testfile.txt", True)
+
+myfile = ABopenfile("testfile.txt", True)
+
+try:
+  myfile.writeat("ShamE", 100)
+  myfile.close()
+except:
+  myfile.close()
+  log("Valid Data write to a file is unsuccessful!")
+
+try:
+    assert(content == myfile.readat(None,0))
+except:
+    log("iacor returned incorrect result. ")
+
+finally:
+  exitall()
+
+
+
+
+
+
