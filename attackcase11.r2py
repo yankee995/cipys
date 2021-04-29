@@ -1,0 +1,24 @@
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+
+myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+myfile.writeat("Stest12345E",0)
+try:
+  myfile.writeat("Stest12345E3",2000000000000)
+except:
+  log('Failed to handle EOF write')
+try:
+  myfile.writeat("Stest12345E3",-1)
+except:
+  log('Failed to handle EOF write')
+
+myfile.close()
+myfile=ABopenfile("testfile.txt",False)  #Open an AB file
+try:
+  assert('Stest12345E' == myfile.readat(None,0))
+  myfile.close()
+except:
+  log('Not able to handle valid data, compromised')
+  myfile.close()

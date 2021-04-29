@@ -1,0 +1,48 @@
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+if "testfile1.txt.a" in listfiles():
+  removefile("testfile1.txt.a")
+if "testfile1.txt.b" in listfiles():
+  removefile("testfile1.txt.b")
+myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+myfile2=ABopenfile("testfile1.txt",True)  #Create an AB file
+
+# I should get 'SE' when reading an empty file...
+assert('SE' == myfile.readat(None,0))
+
+# put some valid data in the file.
+myfile.writeat("Stest12345E",0)
+myfile2.writeat("Stest12345E",0)
+myfile.close()
+myfile2.close()
+myfile=ABopenfile("testfile.txt",False)  #Create an AB file
+myfile2=ABopenfile("testfile1.txt",False)  #Create an AB file
+myfile.writeat("Stest12345E3",2000000000000)
+myfile2.writeat("Stest12345E3",2000000000000)
+myfile.close()
+myfile2.close()
+myfile=ABopenfile("testfile.txt",False)  #Create an AB file
+myfile2=ABopenfile("testfile1.txt",False)  #Create an AB file
+myfile.writeat("3Stest12345E",-1)
+myfile.writeat("3Stest12345E",1)
+myfile.writeat("3Stest12345E",0)
+myfile2.writeat("3Stest12345E",-1)
+myfile.close()
+myfile2.close()
+myfile=ABopenfile("testfile.txt",False)  #Create an AB file
+myfile=ABopenfile("testfile.txt",False)  #Create an AB file
+myfile2=ABopenfile("testfile1.txt",False)  #Create an AB file
+myfile.writeat("Stest12345E",0)
+myfile2.writeat("Stest12345E",0)
+# I should still get 'SE' because the file wasn't closed.
+try:
+  assert('Stest12345E' == myfile.readat(None,0))
+  myfile.close()
+  myfile2.close()
+except:
+  log('Not able to handle valid data, compromised')
+  myfile.close()
+  myfile2.close()
+
